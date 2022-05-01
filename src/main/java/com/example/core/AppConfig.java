@@ -3,7 +3,7 @@ package com.example.core;
 import com.example.core.Order.OrderService;
 import com.example.core.Order.OrderServiceImpl;
 import com.example.core.discount.DiscountPolicy;
-import com.example.core.discount.FixDiscountPolicy;
+import com.example.core.discount.RateDiscountPolicy;
 import com.example.core.member.MemberRepository;
 import com.example.core.member.MemberService;
 import com.example.core.member.MemberServiceImpl;
@@ -24,6 +24,6 @@ public class AppConfig {
     }
 
     public DiscountPolicy discountPolicy() {
-        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 }
