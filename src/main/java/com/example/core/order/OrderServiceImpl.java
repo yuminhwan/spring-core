@@ -1,4 +1,4 @@
-package com.example.core.Order;
+package com.example.core.order;
 
 import com.example.core.discount.DiscountPolicy;
 import com.example.core.member.Member;

@@ -3,11 +3,11 @@ package com.example.core;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.example.core.Order.Order;
-import com.example.core.Order.OrderService;
 import com.example.core.member.Grade;
 import com.example.core.member.Member;
 import com.example.core.member.MemberService;
+import com.example.core.order.Order;
+import com.example.core.order.OrderService;
 
 public class OrderApp {
     public static void main(String[] args) {
