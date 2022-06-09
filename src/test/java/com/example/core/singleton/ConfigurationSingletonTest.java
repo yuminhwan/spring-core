@@ -13,7 +13,7 @@ import com.example.core.order.OrderServiceImpl;
 
 public class ConfigurationSingletonTest {
 
-    @DisplayName("")
+    @DisplayName("@Configuration 싱글톤")
     @Test
     void ConfigurationTest() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -32,6 +32,16 @@ public class ConfigurationSingletonTest {
         assertThat(memberRepository1).isSameAs(memberRepository);
         assertThat(memberRepository2).isSameAs(memberRepository);
         // 왜 같지?
+    }
+
+    @DisplayName("@Configuration 바이트 코드")
+    @Test
+    void configurationDeep() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AppConfig bean = ac.getBean(AppConfig.class);
+
+        System.out.println("bean = " + bean.getClass());
+        // bean = class com.example.core.AppConfig$$EnhancerBySpringCGLIB$$3f4dfc3a
     }
 
 }
