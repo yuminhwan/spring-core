@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.example.core.AutoAppConfig;
 import com.example.core.member.MemberService;
 
-public class AutoAppConfigTest {
+class AutoAppConfigTest {
 
     @DisplayName("컴포넌트 스캔 작동 테스트")
     @Test
