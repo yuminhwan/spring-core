@@ -7,9 +7,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.example.core.AppConfig;
+import com.example.core.discount.FixDiscountPolicy;
 import com.example.core.member.Grade;
 import com.example.core.member.Member;
 import com.example.core.member.MemberService;
+import com.example.core.member.MemoryMemberRepository;
 
 class OrderServiceTest {
 
@@ -36,6 +38,16 @@ class OrderServiceTest {
 
         //then
         assertThat(order.getDiscountPrice()).isEqualTo(1000);
+    }
+
+    @DisplayName("필드 주입 테스트")
+    @Test
+    void filedInjectionTest() {
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        orderService.setMemberRepository(new MemoryMemberRepository());
+        orderService.setDiscountPolicy(new FixDiscountPolicy());
+
+        orderService.createOrder(1L, "itemA", 1000);
     }
 
 }

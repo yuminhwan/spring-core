@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.example.core.AutoAppConfig;
+import com.example.core.member.MemberRepository;
 import com.example.core.member.MemberService;
+import com.example.core.order.OrderServiceImpl;
 
 class AutoAppConfigTest {
 
@@ -19,6 +21,10 @@ class AutoAppConfigTest {
 
         MemberService memberService = ac.getBean(MemberService.class);
         assertThat(memberService).isInstanceOf(MemberService.class);
+
+        OrderServiceImpl bean = ac.getBean(OrderServiceImpl.class);
+        MemberRepository memberRepository = bean.getMemberRepository();
+        assertThat(memberRepository).isNotNull();
     }
 
 }
