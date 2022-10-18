@@ -51,7 +51,7 @@ class ConnectionTest {
         datasource.setJdbcUrl(URL);
         datasource.setUsername(USERNAME);
         datasource.setPassword(PASSWORD);
-        datasource.setMaximumPoolSize(1);
+        datasource.setMaximumPoolSize(10);
         datasource.setPoolName("MyPool");
 
         useDataSource(datasource);
