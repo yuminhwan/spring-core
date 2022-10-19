@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.springdb.domain.Member;
 import com.example.springdb.repository.MemberRepository;
-import com.example.springdb.repository.MemberRepositoryV4_1;
+import com.example.springdb.repository.MemberRepositoryV4_2;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -111,7 +111,7 @@ class MemberServiceV4Test {
 
         @Bean
         MemberRepository memberRepository() {
-            return new MemberRepositoryV4_1(dataSource);
+            return new MemberRepositoryV4_2(dataSource);
         }
 
         @Bean
