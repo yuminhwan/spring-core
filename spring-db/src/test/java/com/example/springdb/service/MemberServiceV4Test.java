@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.springdb.domain.Member;
 import com.example.springdb.repository.MemberRepository;
-import com.example.springdb.repository.MemberRepositoryV4_2;
+import com.example.springdb.repository.MemberRepositoryV5;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  * 예외 누수 문제 해결
  * SQLException 제거
  * MemberRepository 인터페이스 의존
+ * JdbcTemplate 사용
  */
 @Slf4j
 @SpringBootTest
@@ -111,7 +112,7 @@ class MemberServiceV4Test {
 
         @Bean
         MemberRepository memberRepository() {
-            return new MemberRepositoryV4_2(dataSource);
+            return new MemberRepositoryV5(dataSource);
         }
 
         @Bean
