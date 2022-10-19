@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    master:
+      username: hwan
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ${MASTER_URL}
+    slave:
+      username: hwan
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ${SLAVE_URL}
