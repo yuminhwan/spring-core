@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 class UnCheckedAppTest {
 
     /**
@@ -21,6 +24,18 @@ class UnCheckedAppTest {
         Controller controller = new Controller();
         assertThatThrownBy(() -> controller.request())
             .isInstanceOf(Exception.class);
+    }
+
+    @DisplayName("스택 트레이스 테스트")
+    @Test
+    void printEx() {
+        Controller controller = new Controller();
+
+        try {
+            controller.request();
+        } catch (Exception e) {
+            log.info("ex", e);
+        }
     }
 
     static class Controller {
@@ -48,11 +63,16 @@ class UnCheckedAppTest {
     }
 
     static class Repository {
+
+        /**
+         * 예외를 포함하지 않음으로써 SQLException과 스택 트레이스를 확인할 수 없음.
+         * RuntimeException만 확인 가능하기 때문 뭐땜에 예외가 발생한 지 모르게 됨.
+         */
         public void call() {
             try {
                 runSQL();
             } catch (SQLException e) {
-                throw new RuntimeSQLException(e);
+                throw new RuntimeSQLException();
             }
         }
 
@@ -68,6 +88,10 @@ class UnCheckedAppTest {
     }
 
     static class RuntimeSQLException extends RuntimeException {
+
+        public RuntimeSQLException() {
+        }
+
         public RuntimeSQLException(Throwable cause) {
             super(cause);
         }
