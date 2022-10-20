@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.example.springdi.book.Book;
+import com.example.springdi.book.MyBook;
+
 class ReflectionTest {
 
     private Class<Book> bookClass;
@@ -31,8 +34,8 @@ class ReflectionTest {
         Book book = new Book();
         Class<? extends Book> bookClass2 = book.getClass();
 
-        // 3. Class.forName() / FQCN -> com.example.springdi.Book
-        Class<?> bookClass3 = Class.forName("com.example.springdi.Book");
+        // 3. Class.forName() / FQCN -> com.example.springdi.book.Book
+        Class<?> bookClass3 = Class.forName("com.example.springdi.book.Book");
 
         assertAll(
                 () -> assertThat(bookClass).isNotNull(),

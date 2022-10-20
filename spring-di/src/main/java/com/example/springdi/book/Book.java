@@ -1,12 +1,17 @@
-package com.example.springdi;
+package com.example.springdi.book;
 
+@MyAnnotation
+@MyRuntimeAnnotation(name = "test", number = 200)
 public class Book {
 
+    @MyRuntimeAnnotation("value")
     private static String B = "BOOK";
 
     private static final String C = "BOOK";
 
     private String a = "a";
+
+    @MyRuntimeAnnotation
     public String d = "d";
     protected String e = "e";
 
