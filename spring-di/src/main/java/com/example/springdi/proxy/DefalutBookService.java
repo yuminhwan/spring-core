@@ -12,4 +12,9 @@ public class DefalutBookService implements BookService{
     public void rent(RealBook book) {
         System.out.println("rent : " + book.getTitle());
     }
+
+    @Override
+    public void returnBook(RealBook book) {
+        System.out.println("return : " + book.getTitle());
+    }
 }
