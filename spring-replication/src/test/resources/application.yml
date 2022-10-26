@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    master:
+      username: hwan
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://138.2.117.64:3306/replication
+    slave:
+      username: hwan
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://138.2.113.181:3306/replication
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        generate-ddl: false
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        jdbc:
+          lob:
+            non_contextual_creation: true

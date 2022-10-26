@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Premain-Class': 'com.example.MasulsaAgent',
+                'Can-Redefine-Classes': true,
+                'Can-Retransform-Classes': true
+        )
+    }
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'net.bytebuddy:byte-buddy:1.12.18'
+}
+
+test {
+    useJUnitPlatform()
+}
