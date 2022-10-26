@@ -17,8 +17,15 @@ import com.example.springmvc.web.frontcontroller.MyView;
 import com.example.springmvc.web.frontcontroller.v3.controller.MemberFormControllerV3;
 import com.example.springmvc.web.frontcontroller.v3.controller.MemberListControllerV3;
 import com.example.springmvc.web.frontcontroller.v3.controller.MemberSaveControllerV3;
+import com.example.springmvc.web.frontcontroller.v4.controller.MemberFormControllerV4;
+import com.example.springmvc.web.frontcontroller.v4.controller.MemberListControllerV4;
+import com.example.springmvc.web.frontcontroller.v4.controller.MemberSaveControllerV4;
 import com.example.springmvc.web.frontcontroller.v5.MyHandlerAdapter;
 
+/**
+ * 메인 로직을 거의 건드리지 않고 V4로 확장을 함.
+ *  -> 어댑터만 확장시킴. -> OCP (설정을 밖에서 주입한다면)
+ */
 @WebServlet(name = "frontControllerServiceV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerServiceV5 extends HttpServlet {
 
@@ -70,9 +77,15 @@ public class FrontControllerServiceV5 extends HttpServlet {
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
+
+        // v4
+        handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members", new MemberListControllerV4());
     }
 
     private void initHandlerAdapters() {
         handlerAdapters.add(new ControllerV3HandlerAdapter());
+        handlerAdapters.add(new ControllerV4HandlerAdapter());
     }
 }
