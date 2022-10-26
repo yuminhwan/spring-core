@@ -12,6 +12,9 @@ import com.example.springmvc.domain.member.Member;
 import com.example.springmvc.domain.member.MemberRepository;
 import com.example.springmvc.web.frontcontroller.v1.ControllerV1;
 
+/**
+ * 아직 forward하는 중복로직이 존재함.
+ */
 public class MemberListControllerV1 implements ControllerV1 {
 
     private final MemberRepository memberRepository = MemberRepository.getInstance();
