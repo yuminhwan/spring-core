@@ -1,4 +1,4 @@
-package com.example.java8to11;
+package com.example.java8to11.functionalinterface;
 
 @FunctionalInterface
 public interface NumberSomething {

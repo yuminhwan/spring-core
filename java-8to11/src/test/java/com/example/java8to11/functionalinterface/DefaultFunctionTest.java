@@ -1,4 +1,4 @@
-package com.example.java8to11;
+package com.example.java8to11.functionalinterface;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
