@@ -1,13 +1,34 @@
-package com.example.springmvc.filter;
+package com.example.springmvc;
 
 import javax.servlet.Filter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.example.springmvc.filter.LogFilter;
+import com.example.springmvc.filter.LoginCheckFilter;
+import com.example.springmvc.interceptor.LogInterceptor;
+import com.example.springmvc.interceptor.LoginCheckInterceptor;
 
 @Configuration
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LogInterceptor())
+            .order(1)
+            .addPathPatterns("/**")
+            .excludePathPatterns("/css/**", "/*.ico", "/error");
+
+        registry.addInterceptor(new LoginCheckInterceptor())
+            .order(2)
+            .addPathPatterns("/**")
+            .excludePathPatterns("/", "/members/add", "/login", "/logout", "/css/**",
+                "/*.ico", "/error");
+    }
 
     /**
      * FilterRegistrationBean를 통해 filter 등록 가능 - 스프링 부트 지원
