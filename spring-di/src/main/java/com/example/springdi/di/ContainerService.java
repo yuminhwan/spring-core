@@ -1,5 +1,6 @@
 package com.example.springdi.di;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
@@ -23,6 +24,12 @@ public class ContainerService {
 
     private static <T> T createInstance(Class<T> classType)  {
         try {
+            Constructor<?>[] constructors = classType.getConstructors();
+            for (Constructor<?> constructor : constructors) {
+                if (constructor.isAnnotationPresent(Inject.class)) {
+                    constructor.newInstance()
+                }
+            }
             return classType.getConstructor(null).newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
