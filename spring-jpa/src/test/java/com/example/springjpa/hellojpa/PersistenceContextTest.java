@@ -52,6 +52,8 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
         }
     }
 
@@ -80,6 +82,8 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
         }
     }
 
@@ -106,6 +110,8 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
         }
     }
 
@@ -129,6 +135,8 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
         }
     }
 
@@ -156,6 +164,8 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
         }
     }
 
@@ -182,6 +192,8 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
         }
     }
 
@@ -215,6 +227,41 @@ class PersistenceContextTest {
         } catch (Exception e) {
             tx.rollback();
             throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * 영속성 컨텍스트가 제공하는 기능을 사용 못함
+     *
+     * 준영속 상태로 만드는 방법
+     * 1. em.detach(entity) : 특정 엔티티만 준영속 상태로 전환
+     * 2. em.clear() : 영속성 컨텍스트를 완전히 초기화
+     * 3. em.close() : 영속성 컨텍스트를 종료
+     */
+    @DisplayName("영속 -> 준영속 : 영속 상태의 엔티티가 영속성 컨텍스트에서 분리")
+    @Test
+    void detached() {
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAA");
+
+            // update쿼리 안나감!! -> 영속성 컨텍스트에서 관리하지 않으니깐!
+            em.detach(member);
+            // em.clear();
+            // em.close();
+
+            System.out.println("======================");
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw e;
+        } finally {
+            em.close();
         }
     }
 }
