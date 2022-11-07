@@ -3,7 +3,13 @@ package com.example.springjpa.hellojpa;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * @Entity가 붙은 클래스는 JPA가 관리, 엔티티라 한다.
+ *
+ * @Table은 엔티티와 매핑할 테이블 지정
+ */
 @Entity
+// @Table(name = "MBR")
 public class Member {
 
     @Id
