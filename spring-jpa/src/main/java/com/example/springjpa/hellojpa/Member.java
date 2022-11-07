@@ -1,5 +1,6 @@
 package com.example.springjpa.hellojpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,13 +8,19 @@ import javax.persistence.Id;
  * @Entity가 붙은 클래스는 JPA가 관리, 엔티티라 한다.
  *
  * @Table은 엔티티와 매핑할 테이블 지정
+ *
+ * DDL 생성 기능은 DDL을 자동 생성할 때만 사용되고 JPA의 실행 로직에는 영향을 주지 않는다.
  */
 @Entity
-// @Table(name = "MBR")
+// @Table(uniqueConstraints = {@UniqueConstraint(name = "NAME_AGE_UNIQUE",
+//                                               columnNames = {"NAME,AGE"})}
+// )
 public class Member {
 
     @Id
     private Long id;
+
+    @Column(unique = true, length = 10)
     private String name;
 
     protected Member() {
