@@ -184,4 +184,37 @@ class PersistenceContextTest {
             throw e;
         }
     }
+
+    /**
+     * 1. em.flush() - 직접 호출
+     * 2. 트랜잭션 커밋 - 플러시 자동 호출
+     * 3. JPQL 쿼리 실행 - 플러시 자동 호출
+     *      -> member1,2,3을 persist 한 뒤 JPQL쿼리 실행 시 바로 DB에 찌르는 데 아직 반영이 안되어있어 일관성을 보장못함.
+     *      -> 이를 해결하고자 JPQL 쿼리 실행 시 플러시가 자동으로 호출됨 -> (관련된 객체들에 대한 JPQL일 시) <- 확인필요
+     *      -> FlushModeType.AUTO(default) : 커밋이나 쿼리를 실행할 때 플러시
+     *      -> FlushModeType.COMMIT : 커밋할 때만 플러시
+     *
+     * 1차 캐시를 지우는 것이 아닌 영속성 컨텍스트 쓰기 지연 SQL 저장소를 보내 DB에 반영하는 것
+     * 영속성 컨텍스트의 변경내용을 데이터베이스에 동기화
+     * 트랜잭션이라는 작업 단위가 중요 -> 커밋 직전에만 동기화하면 됨
+     */
+    @DisplayName("영속성 컨텍스트 플러시 3가지 방식")
+    @Test
+    void flush() {
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+
+            em.flush();
+
+            System.out.println("======================");
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw e;
+        }
+    }
 }
