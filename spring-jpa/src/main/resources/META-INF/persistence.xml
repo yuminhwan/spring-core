@@ -5,6 +5,11 @@
 
     <persistence-unit name="hello">
         <class>com.example.springjpa.hellojpa.Member</class>
+        <class>com.example.springjpa.hellojpa.MemberEntity</class>
+        <class>com.example.springjpa.inheritance.Item</class>
+        <class>com.example.springjpa.inheritance.Movie</class>
+        <class>com.example.springjpa.inheritance.Album</class>
+        <class>com.example.springjpa.inheritance.Book</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
