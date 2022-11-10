@@ -1,5 +1,7 @@
 package com.example.springjpa.inheritance;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -8,6 +10,7 @@ import javax.persistence.Persistence;
 public class InheritanceMain {
 
     public static void main(String[] args) {
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
 
@@ -15,17 +18,12 @@ public class InheritanceMain {
         tx.begin();
 
         try {
-            Movie movie = new Movie();
-            movie.setDirector("Hwan");
-            movie.setActor("hwans");
-            movie.setName("bang");
-            movie.setPrice(10000);
+            Computer computer = new Computer();
+            computer.setCreatedDate(LocalDateTime.now());
+            computer.setCreatedBy("hwan");
+            computer.setName("mac");
 
-            em.persist(movie);
-            em.flush();
-            em.clear();
-
-            em.find(Item.class, movie.getId());
+            em.persist(computer);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

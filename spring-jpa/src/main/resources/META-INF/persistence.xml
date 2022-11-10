@@ -10,6 +10,7 @@
         <class>com.example.springjpa.inheritance.Movie</class>
         <class>com.example.springjpa.inheritance.Album</class>
         <class>com.example.springjpa.inheritance.Book</class>
+        <class>com.example.springjpa.inheritance.Computer</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
