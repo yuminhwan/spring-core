@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 /**
  * GeneratedValue - 자동 키 매핑
@@ -32,15 +31,14 @@ import javax.persistence.SequenceGenerator;
  *   - 단점 : 성능
  */
 @Entity
-@SequenceGenerator(
-    name = "MEMBER_SEQ_GENERATOR",
-    sequenceName = "MEMBER_SEQ",
-    initialValue = 1, allocationSize = 50)
+// @SequenceGenerator(
+//     name = "MEMBER_SEQ_GENERATOR",
+//     sequenceName = "MEMBER_SEQ",
+//     initialValue = 1, allocationSize = 50)
 public class MemberEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                    generator = "MEMBER_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name", nullable = false)
