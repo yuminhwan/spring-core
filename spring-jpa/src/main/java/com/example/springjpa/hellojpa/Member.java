@@ -18,6 +18,13 @@ import javax.persistence.ManyToOne;
  *   - 테이블은 외래 키 조인을 사용해서 연관된 테이블을 찾는다.
  *   - 객체는 참조를 사용해서 연관된 객체를 찾는다.
  *   - 테이블과 객체 사이에는 이런 큰 간격이 있다.
+ *
+ *  양방향 매핑시 양쪽 다 값을 입력하지 않을 시 문제점
+ *  1. 1차 캐시에 있음. -> 멤버를 넣지 않으면 멤버 정보가 없음.
+ *  2. 테스트 케이스시에도 문제가 있음. -> JPA 없이도 동작해야함.
+ *  3. 객체지향적으로 생각해도 양쪽 다 넣는 게 맞다. -> 순수 객체 상태 생각
+ *
+ *  ===> 연관관계 편의 메서드 사용 -> 상황에 맞게 한쪽에만 설정해주자!
  */
 @Entity
 public class Member {
@@ -59,5 +66,14 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    /**
+     * 연관관계 편의 메서드
+     * set 네이밍보단 다른 네이밍을 사용하는 것이 좋다.
+     */
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
     }
 }

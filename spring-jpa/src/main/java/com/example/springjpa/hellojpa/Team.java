@@ -59,4 +59,12 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     *  연관관계 편의 메서드는 하나만 !
+     */
+    // public void addMember(Member member) {
+    //     member.setTeam(this);
+    //     members.add(member);
+    // }
 }
