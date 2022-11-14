@@ -1,6 +1,8 @@
 package com.example.springjpashop.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +10,18 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 객체지향을 생각하면 ID보단 Member 객체를 가지고 있는 것이 맞지 않을까?
+ * 현재는 객체 설계를 테이블 설계에 맞춘 방식
+ *   - 테이블의 외래키를 객체에 그대로 가져옴
+ *   - 객체 그래프 탐색이 불가능
+ *   - 참조가 없으므로 UML도 잘못됨
+ */
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -19,19 +31,21 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    /**
-     * 객체지향을 생각하면 ID보단 Member 객체를 가지고 있는 것이 맞지 않을까?
-     * 현재는 객체 설계를 테이블 설계에 맞춘 방식
-     *   - 테이블의 외래키를 객체에 그대로 가져옴
-     *   - 객체 그래프 탐색이 불가능
-     *   - 참조가 없으므로 UML도 잘못됨
-     */
-    @Column(name = "MEMBER_ID")
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItem.setOrder(this);
+        orderItems.add(orderItem);
+    }
 
     public Long getId() {
         return id;
@@ -41,12 +55,12 @@ public class Order {
         this.id = id;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public LocalDateTime getOrderDate() {

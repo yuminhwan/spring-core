@@ -5,8 +5,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.example.springjpashop.domain.Member;
 import com.example.springjpashop.domain.Order;
+import com.example.springjpashop.domain.OrderItem;
 
 public class JpaMain {
 
@@ -18,10 +18,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Order order = em.find(Order.class, 1L);
-            Long memberId = order.getMemberId();
+            Order order = new Order();
+            // order.addOrderItem(new OrderItem());
+            em.persist(order);
 
-            Member member = em.find(Member.class, memberId);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
 
             tx.commit();
         } catch (Exception e) {
