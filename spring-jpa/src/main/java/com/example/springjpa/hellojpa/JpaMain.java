@@ -1,7 +1,5 @@
 package com.example.springjpa.hellojpa;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -17,28 +15,17 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
             Member member = new Member();
             member.setUsername("member1");
-            member.changeTeam(team);
+
             em.persist(member);
 
-            // team.addMember(member);
+            Team team = new Team();
+            team.setName("teamA");
+            // member쪽에 update 쿼리
+            team.getMembers().add(member);
 
-            // em.flush();
-            // em.clear();
-
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-
-            System.out.println("======================");
-            for (Member m : members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-            }
-            System.out.println("======================");
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {
