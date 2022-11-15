@@ -6,6 +6,7 @@
     <persistence-unit name="hello">
         <class>com.example.springjpa.hellojpa.Member</class>
         <class>com.example.springjpa.hellojpa.Team</class>
+        <class>com.example.springjpa.hellojpa.Locker</class>
         <class>com.example.springjpa.hellojpa.MemberEntity</class>
         <class>com.example.springjpa.inheritance.Item</class>
         <class>com.example.springjpa.inheritance.Movie</class>
