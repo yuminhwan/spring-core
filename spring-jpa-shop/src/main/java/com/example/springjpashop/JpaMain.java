@@ -5,8 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.example.springjpashop.domain.Order;
-import com.example.springjpashop.domain.OrderItem;
+import com.example.springjpashop.domain.Book;
 
 public class JpaMain {
 
@@ -18,14 +17,11 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Order order = new Order();
-            // order.addOrderItem(new OrderItem());
-            em.persist(order);
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("Hwan");
 
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-
-            em.persist(orderItem);
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {

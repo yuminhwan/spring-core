@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Delivery {
+public class Delivery extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -16,7 +16,7 @@ public class Delivery {
 
     @OneToOne(mappedBy = "delivery")
     private Order order;
-    
+
     private String city;
     private String street;
     private String zipcode;
