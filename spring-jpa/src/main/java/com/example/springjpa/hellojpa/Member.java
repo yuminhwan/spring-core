@@ -1,16 +1,11 @@
 package com.example.springjpa.hellojpa;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  * @Entity가 붙은 클래스는 JPA가 관리, 엔티티라 한다.
@@ -38,20 +33,34 @@ public class Member {
     @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
-
     @Column(name = "USERNAME")
     private String username;
-
     @ManyToOne
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+    // @OneToOne
+    // @JoinColumn(name = "LOCKER_ID")
+    // private Locker locker;
+    //
+    // @OneToMany(mappedBy = "member")
+    // private List<MemberProduct> memberProducts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+    protected Member() {
+    }
+
+    public Member(Long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Long getId() {
         return id;
@@ -67,6 +76,14 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return this.username;
+    }
+
+    public void setName(String name) {
+        this.username = name;
     }
 
     /**
