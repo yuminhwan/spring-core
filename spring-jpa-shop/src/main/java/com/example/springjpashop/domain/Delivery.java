@@ -1,5 +1,7 @@
 package com.example.springjpashop.domain;
 
+import static javax.persistence.FetchType.*;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +16,7 @@ public class Delivery extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 
     private String city;
