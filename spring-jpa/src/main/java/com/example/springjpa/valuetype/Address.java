@@ -1,5 +1,7 @@
 package com.example.springjpa.valuetype;
 
+import java.util.Objects;
+
 import javax.persistence.Embeddable;
 
 /**
@@ -10,6 +12,9 @@ import javax.persistence.Embeddable;
  * 해결방법 -> 불변 객체
  * 1. 생성자에서 값을 모두 받고 setter 삭제
  * 2. setter를 private로
+ *
+ *  값 타입 비교¸
+ *    - 인스턴스가 달라도 그 안에 값이 같으면 같은 것으로 봐야 함
  */
 @Embeddable
 public class Address {
@@ -49,5 +54,21 @@ public class Address {
 
     private void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Address address = (Address)o;
+        return Objects.equals(getCity(), address.getCity()) && Objects.equals(getStreet(),
+            address.getStreet()) && Objects.equals(getZipcode(), address.getZipcode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCity(), getStreet(), getZipcode());
     }
 }
