@@ -20,6 +20,7 @@
         <class>com.example.springjpa.valuetype.Member</class>
         <class>com.example.springjpa.valuetype.Period</class>
         <class>com.example.springjpa.valuetype.Address</class>
+        <class>com.example.springjpa.valuetype.AddressEntity</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
