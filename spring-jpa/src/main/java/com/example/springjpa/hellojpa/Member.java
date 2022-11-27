@@ -47,7 +47,7 @@ public class Member {
     // @OneToMany(mappedBy = "member")
     // private List<MemberProduct> memberProducts = new ArrayList<>();
 
-    protected Member() {
+    public Member() {
     }
 
     public Member(Long id, String username) {
