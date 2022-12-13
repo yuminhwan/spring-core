@@ -32,6 +32,10 @@ public class Team {
         this.id = id;
     }
 
+    public List<Member> getMembers() {
+        return members;
+    }
+
     public String getName() {
         return name;
     }
