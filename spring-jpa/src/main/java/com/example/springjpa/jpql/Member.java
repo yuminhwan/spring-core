@@ -1,6 +1,8 @@
 package com.example.springjpa.jpql;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,10 +19,16 @@ public class Member {
     private Long id;
     private String username;
     private int age;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
+
+    public void setType(MemberType type) {
+        this.type = type;
+    }
 
     public void changeTeam(Team team) {
         this.team = team;
