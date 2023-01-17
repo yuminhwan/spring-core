@@ -1,0 +1,6 @@
+exchange:
+  currency:
+    api:
+      uri: https://api.apilayer.com/currency_data/live
+      key:
+
