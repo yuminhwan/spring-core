@@ -1,6 +1,7 @@
 package com.example.springtdd.product;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,9 @@ class ProductApiTest extends ApiTest {
             .extract();
 
         // then
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertAll(
+            () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value()),
+            () -> assertThat(response.jsonPath().getString("name")).isEqualTo("상품명")
+        );
     }
 }

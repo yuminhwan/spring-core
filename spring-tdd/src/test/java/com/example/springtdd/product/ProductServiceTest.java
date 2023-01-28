@@ -33,7 +33,7 @@ class ProductServiceTest {
         final Long productId = 1L;
 
         // when
-        final GetProductResponse response = productService.getProduct(productId);
+        final GetProductResponse response = productService.getProduct(productId).getBody();
 
         // then
         assertThat(response).isNotNull();
