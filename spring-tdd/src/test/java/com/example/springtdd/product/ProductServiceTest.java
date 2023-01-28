@@ -1,9 +1,15 @@
 package com.example.springtdd.product;
 
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * 검증 부분을 먼저 만드는 것이 쉽다!
+ */
 @SpringBootTest
 class ProductServiceTest {
 
@@ -13,19 +19,24 @@ class ProductServiceTest {
     @Test
     void 상품등록() {
         // given
-        final AddProductRequest request = 상품등록요청_생성();
+        final AddProductRequest request = ProductSteps.상품등록요청_생성();
 
         // when
-        productService.addProduct(request);
-
         // then
+        assertDoesNotThrow(() -> productService.addProduct(request));
     }
 
-    private AddProductRequest 상품등록요청_생성() {
-        final String name = "상품명";
-        final int price = 1000;
-        final DiscountPolicy discountPolicy = DiscountPolicy.NONE;
-        return new AddProductRequest(name, price, discountPolicy);
+    @Test
+    void 상품조회() {
+        // given
+        productService.addProduct(ProductSteps.상품등록요청_생성());
+        final Long productId = 1L;
+
+        // when
+        final GetProductResponse response = productService.getProduct(productId);
+
+        // then
+        assertThat(response).isNotNull();
     }
 
 }
