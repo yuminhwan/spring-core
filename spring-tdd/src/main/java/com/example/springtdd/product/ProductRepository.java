@@ -1,17 +1,8 @@
 package com.example.springtdd.product;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class ProductRepository {
-    private final Map<Long, Product> persistence = new ConcurrentHashMap<>();
-    private Long sequence = 0L;
-
-    public void save(final Product product) {
-        product.assignId(++sequence);
-        persistence.put(product.getId(), product);
-    }
+interface ProductRepository extends JpaRepository<Product, Long> {
 }
