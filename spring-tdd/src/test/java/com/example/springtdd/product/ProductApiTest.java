@@ -6,11 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
 import com.example.springtdd.ApiTest;
-
-import io.restassured.RestAssured;
 
 class ProductApiTest extends ApiTest {
 
@@ -53,12 +50,7 @@ class ProductApiTest extends ApiTest {
         final UpdateProductRequest request = ProductSteps.상품수정요청_생성();
 
         // when
-        final var response = RestAssured.given().log().all()
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(request)
-            .patch("/products/{productId}", productId)
-            .then().log().all()
-            .extract();
+        final var response = ProductSteps.상품수정요청(productId, request);
 
         // then
         assertAll(
@@ -66,4 +58,5 @@ class ProductApiTest extends ApiTest {
             () -> assertThat(productRepository.findById(1L).get().getPrice()).isEqualTo(2000)
         );
     }
+
 }
