@@ -8,10 +8,6 @@ import org.springframework.http.HttpStatus;
 
 import com.example.springtdd.ApiTest;
 
-import io.restassured.RestAssured;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
-
 class ProductApiTest extends ApiTest {
 
     @Test
@@ -33,10 +29,7 @@ class ProductApiTest extends ApiTest {
         Long productId = 1L;
 
         // when
-        final ExtractableResponse<Response> response = RestAssured.given().log().all()
-            .get("/products/{productId}", productId)
-            .then().log().all()
-            .extract();
+        final var response = ProductSteps.상품조회요청(productId);
 
         // then
         assertAll(
