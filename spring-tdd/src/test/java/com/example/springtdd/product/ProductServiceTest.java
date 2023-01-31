@@ -3,26 +3,19 @@ package com.example.springtdd.product;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 /**
  * 검증 부분을 먼저 만드는 것이 쉽다!
  */
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class ProductServiceTest {
-    private ProductService productService;
-    private ProductPort productPort;
 
-    @BeforeEach
-    void setUp() {
-        productPort = Mockito.mock(ProductPort.class);
-        productService = new ProductService(productPort);
-    }
+    @Autowired
+    private ProductService productService;
 
     @Test
     void 상품등록() {
@@ -50,16 +43,20 @@ class ProductServiceTest {
     @Test
     void 상품수정() {
         // given
+        productService.addProduct(ProductSteps.상품등록요청_생성());
         final Long productId = 1L;
         final UpdateProductRequest request = new UpdateProductRequest("상품 수정", 2000, DiscountPolicy.NONE);
-        final Product product = new Product("상품명", 1000, DiscountPolicy.NONE);
-        BDDMockito.given(productPort.getProduct(productId)).willReturn(product);
 
         // when
         productService.updateProduct(productId, request);
 
         // then
-        assertThat(product.getName()).isEqualTo("상품 수정");
+        final ResponseEntity<GetProductResponse> response = productService.getProduct(productId);
+        final GetProductResponse productResponse = response.getBody();
+        assertAll(
+            () -> assertThat(productResponse.name()).isEqualTo("상품 수정"),
+            () -> assertThat(productResponse.price()).isEqualTo(2000)
+        );
     }
 
     private static class StubProductPort implements ProductPort {
