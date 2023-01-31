@@ -5,17 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * 검증 부분을 먼저 만드는 것이 쉽다!
  */
+@ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
-
-    private final StubProductPort productPort = new StubProductPort();
     private ProductService productService;
+    private ProductPort productPort;
 
     @BeforeEach
     void setUp() {
+        productPort = Mockito.mock(ProductPort.class);
         productService = new ProductService(productPort);
     }
 
@@ -48,7 +53,7 @@ class ProductServiceTest {
         final Long productId = 1L;
         final UpdateProductRequest request = new UpdateProductRequest("상품 수정", 2000, DiscountPolicy.NONE);
         final Product product = new Product("상품명", 1000, DiscountPolicy.NONE);
-        productPort.getProduct_will_return = product;
+        BDDMockito.given(productPort.getProduct(productId)).willReturn(product);
 
         // when
         productService.updateProduct(productId, request);
