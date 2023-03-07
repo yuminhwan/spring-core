@@ -22,9 +22,11 @@ public class Application {
                 @Override
                 protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws
                     IOException {
+                    final String name = req.getParameter("name");
+
                     resp.setStatus(HttpStatus.OK.value());  // 상태 코드
                     resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE); // 헤더
-                    resp.getWriter().println("Hello Servlet");  // 바디
+                    resp.getWriter().println("Hello " + name);  // 바디
                 }
             }).addMapping("/hello");
         });
