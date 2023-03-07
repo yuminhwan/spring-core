@@ -21,4 +21,17 @@
 - 프론트 컨트롤러로 해결!
     - 공통 로직 처리
         - 다국어, 인증, 보안 등
-    - 위임하여 처리 
+    - 위임하여 처리
+
+## 독립 실행형 스프링 애플리케이션
+
+### 스프링 컨테이너
+
+- 스프링 컨테이너 필요사항
+    - BO (Business Objects)
+    - Configuration Metadata
+
+- ApplicationContext - GenericApplicationContext
+- 서블릿쪽에선 빈이 어떻게 만들어졌는 지 관심 X
+    - 그냥 가져다 쓴다.
+    - 빈 생성은 컨테이너쪽에서 담당
