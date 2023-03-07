@@ -18,8 +18,9 @@ public class Application {
 
     public static void main(String[] args) {
         final GenericApplicationContext applicationContext = new GenericApplicationContext();
-        applicationContext.registerBean(HelloController.class); // 빈 등록
-        applicationContext.refresh(); // 초기화
+        applicationContext.registerBean(HelloController.class);
+        applicationContext.registerBean(SimpleHelloService.class);
+        applicationContext.refresh();
 
         final ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
         final WebServer webServer = serverFactory.getWebServer(servletContext -> {
