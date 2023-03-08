@@ -59,3 +59,11 @@
 
 - 메타 어노테이션 : 어노테이션에 붙은 어노테이션
 - 스프링은 컴포넌트 스캔시 메타 어노테이션까지 확인한다. -> @Controller, @Service, @Repository (스테레오타입)
+
+### Bean 생명 주기 메소드
+
+- ServletWebServerFactory, DispatcherServlet도 빈으로 등록하자.
+- DispatcherServlet의 경우 ApplicationContext가 필요한데 이를 onRefresh 메서드 안에서 지정해준다.
+- 위에서 지정한 코드를 지워도 동작하게 된다. 왜?? -> 스프링 컨테이너가 해준다.
+- ApplicationContextAware를 구현한 클래스가 빈으로 등록되면 스프링 컨테이너가 자신을 주입하게 된다.
+    - 언제 일어나? -> 컨테이너가 초기화 될 때
