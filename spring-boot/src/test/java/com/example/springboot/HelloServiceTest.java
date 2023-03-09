@@ -17,4 +17,15 @@ class HelloServiceTest {
         assertThat(sut).isEqualTo("Hello Test");
     }
 
+    @Test
+    void helloDecorator() {
+        // given
+        HelloDecorator decorator = new HelloDecorator(name -> name);
+
+        // when
+        String sut = decorator.sayHello("Test");
+
+        // then
+        assertThat(sut).isEqualTo("*Test*");
+    }
 }
